@@ -11,6 +11,9 @@
 <loc>http://localhost:4000/blog</loc>
 </url>
 <url>
+<loc>http://localhost:4000/esp32</loc>
+</url>
+<url>
 <loc>http://localhost:4000/flutter</loc>
 </url>
 <url>

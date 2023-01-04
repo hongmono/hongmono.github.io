@@ -10,6 +10,8 @@ sidebar:
         url: "/flutter"
       - title: "FPGA"
         url: "/fpga"
+      - title: "ESP32"
+        url: "/esp32"
 
   - title: "Life"
     children:
@@ -17,5 +19,3 @@ sidebar:
         url: "/blog"
       - title: "Homeassistant"
         url: "/homeassistant"
-
-
