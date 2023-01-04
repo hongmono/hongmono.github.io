@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-01-04T21:30:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Hongmono</title><subtitle>시도하는 개발자</subtitle><author><name>Jungwook Hong</name></author><entry><title type="html">Flutter에서 ble사용하기 flutter-reactive-ble</title><link href="http://localhost:4000/flutter/flutter-reactive-ble/" rel="alternate" type="text/html" title="Flutter에서 ble사용하기 flutter-reactive-ble" /><published>2023-01-04T00:00:00+09:00</published><updated>2023-01-04T00:00:00+09:00</updated><id>http://localhost:4000/flutter/flutter-reactive-ble</id><content type="html" xml:base="http://localhost:4000/flutter/flutter-reactive-ble/"><![CDATA[<p>bluetooth 통신에는 bluetooth classic과 bluetooth low energy가 있습니다.</p>
+
+<p><a href="https://pub.dev/packages/flutter_reactive_ble">flutter_reactive_ble</a> 는 ble(bluetooth low energy) 통신을 지원하는 패키지입니다.</p>
+
+<p>다른 유명한 패키지로는 <a href="https://pub.dev/packages/flutter_blue_plus">flutter_blue_plus</a> 가 있습니다. <a href="https://pub.dev/packages/flutter_blue">flutter_blue</a>가 개발이 중단되어 다른 개발자가 이어서 개발하는 패키지로 알고 있습니다.</p>
+
+<p>이번 포스트에서는 flutter_reactive_ble의 사용방법에 대해서 알아보겠습니다.</p>
+
+<hr />
+
+<h2 id="installation">Installation</h2>
+
+<p>명령어로 설치하는 방법입니다.
+<code class="language-plaintext highlighter-rouge">flutter pub add flutter_reactive_ble</code></p>
+
+<p>또는 pubspec.yaml 에 입력하여 설치하는 방법입니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies:
+    flutter_reactive_ble: ^5.0.3
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="features">Features</h2>
+
+<p>다음은 pub.dev에 있는 내용입니다.</p>
+
+<p>The reactive BLE lib supports the following:</p>
+
+<ul>
+  <li>BLE device discovery</li>
+  <li>Observe host device BLE status</li>
+  <li>Establishing a BLE connection</li>
+  <li>Maintaining connection status of multiple BLE devices</li>
+  <li>Discover services(will be implicit)</li>
+  <li>Read / write a characteristic</li>
+  <li>Subscribe to a characteristic</li>
+  <li>Clear GATT cache</li>
+  <li>Negotiate MTU size</li>
+</ul>
+
+<hr />
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Android
+안드로이드에서 사용하려면 <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code>에 다음의 권한을 추가해야 합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" /&gt;
+&lt;uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="30" /&gt;
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="usage">Usage</h2>
+
+<p>패키지를 import 합니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+</code></pre></div></div>
+
+<p>Flutter_reactive_ble 를 사용하기 위해서는 객체를 선언해야 합니다</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final flutterReactiveBle = FlutterReactiveBle();
+</code></pre></div></div>
+
+<p>BLE 디바이스를 검색하여 코드입니다.
+results.contains(device) 로 검색을 하면 false만 출력되어 id끼리 비교했습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List&lt;DiscoveredDevice&gt; results = [];
+
+flutterReactiveBle.scanForDevices(withServices: []).listen((DiscoveredDevice device) {
+    if(results.any((result) =&gt; result.id == device.id)) return;
+    results.add(device);
+});
+</code></pre></div></div>
+
+<p>BLE 디바이스와 연결, 해제하는 코드입니다.
+Flutter_reactive_ble 패키지에는 디바이스와 연결하는 함수는 있지만 연결을 해제하는 함수는 따로 존재하지 않습니다.
+연결할 때 만들어지는 stream을 cancel하는것으로 연결을 해제할 수 있습니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StreamSubscription&lt;ConnectionStateUpdate&gt; connection;
+
+// 연결
+connection = flutterReactiveBle.connectToDevice(id: device.id, connectionTimeout: const Duration(seconds: 4))
+            .listen((ConnectionStateUpdate state) {
+                switch (state.connectionState) {
+                    case DeviceConnectionState.disconnected:
+                        break;
+                    case DeviceConnectionState.connecting:
+                        break;
+                    case DeviceConnectionState.connected:
+                        break;
+                    case DeviceConnectionState.disconnecting:
+                        break;
+                }
+            });
+
+// 해제
+connection.cancel();
+</code></pre></div></div>
+
+<p>디바이스의 Service와 Chracteristic을 찾아 연결하는 코드입니다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutterReactiveBle.discoverServices(device.id).then((List&lt;DiscoveredService&gt; services) {
+    for(DiscoverdService service in services) {
+        for(DiscoveredCharacteristic characteristic in service.characteristics) {
+            if(characteristic.isNotifiable) {
+                notifyCharacteristic = QualifiedCharacteristic(
+                  serviceId: service.serviceId,
+                  characteristicId: characteristic.characteristicId,
+                  deviceId: device.id,
+                );
+            }
+
+            if(characteristic.isWritableWithResponse) {
+                writeCharacteristic = QualifiedCharacteristic(
+                  serviceId: service.serviceId,
+                  characteristicId: characteristic.characteristicId,
+                  deviceId: device.id,
+                );
+            }
+
+            if(characteristic.isWritableWithoutResponse) {
+            }
+
+            if(characteristic.isReadable) {
+                readCharacteristic = QualifiedCharacteristic(
+                  serviceId: service.serviceId,
+                  characteristicId: characteristic.characteristicId,
+                  deviceId: device.id,
+                );
+            }
+        }
+    }
+
+    flutterReactiveBle.subscribeToCharacteristic(notifyCharacteristic).listen((value) {
+      Logger().i(value);
+    });
+
+    flutterReactiveBle.writeCharacteristicWithoutResponse(
+        writeCharacteristic,
+        value: const Utf8Encoder().convert("Hello World!"),
+    );
+
+    flutterReactiveBle.readCharacteristic(readCharacteristic).then((value) {
+      Logger().i(value);
+    });
+});
+</code></pre></div></div>]]></content><author><name>Jungwook Hong</name></author><category term="flutter" /><category term="flutter" /><category term="ble" /><category term="bluetooth" /><summary type="html"><![CDATA[bluetooth 통신에는 bluetooth classic과 bluetooth low energy가 있습니다.]]></summary></entry></feed>

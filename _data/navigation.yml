@@ -1,0 +1,18 @@
+# main links
+main:
+  - title: "About"
+    url: /about/
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
+
+sidebar:
+  - title: ""
+    children:
+      - title: "개발"
+        url: "/develop"
+      - title: "일상"
+        url: "/blog"
