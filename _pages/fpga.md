@@ -1,8 +1,8 @@
 ---
-title: "일상"
+title: "FPGA"
 layout: archive
-permalink: /blog
+permalink: /fpga
 ---
 
-{% assign posts = site.categories.blog %}
+{% assign posts = site.categories.fpga %}
 {% for post in posts %} {% include archive-single.html type=page.entries_layout %}{% endfor %}

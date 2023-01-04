@@ -3,6 +3,6 @@ title: "{{title}}"
 categories:
 tags:
 toc: true
-toc-sticky: true
+toc_sticky: true
 ---
 {{caret}}

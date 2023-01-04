@@ -7,7 +7,7 @@ tags:
   - ble
   - bluetooth
 toc: true
-toc-sticky: true
+toc_sticky: true
 ---
 
 bluetooth 통신에는 bluetooth classic과 bluetooth low energy가 있습니다.

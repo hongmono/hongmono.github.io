@@ -8,6 +8,15 @@
 <loc>http://localhost:4000/about/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/blog</loc>
+</url>
+<url>
+<loc>http://localhost:4000/flutter</loc>
+</url>
+<url>
+<loc>http://localhost:4000/fpga</loc>
+</url>
+<url>
 <loc>http://localhost:4000/</loc>
 </url>
 </urlset>

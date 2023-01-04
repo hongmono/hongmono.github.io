@@ -2,17 +2,18 @@
 main:
   - title: "About"
     url: /about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
 
 sidebar:
-  - title: ""
+  - title: "PROGRAMMING"
     children:
-      - title: "개발"
-        url: "/develop"
+      - title: "Flutter"
+        url: "/flutter"
+      - title: "FPGA"
+        url: "/fpga"
+
+  - title: "Life"
+    children:
       - title: "일상"
         url: "/blog"
+
+

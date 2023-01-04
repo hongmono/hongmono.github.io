@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "ko_KR"
 title                    : "Hongmono"
 title_separator          : "-"
-subtitle                 : "version 1.0" # site tagline that appears below site title in masthead
+subtitle                 : # "version 1.0" # site tagline that appears below site title in masthead
 name                     : "Jungwook Hong"
 description              : "시도하는 개발자"
 url                      : "https://hongmono.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
@@ -300,3 +300,5 @@ defaults:
     values:
       layout: single
       author_profile: true
+      sidebar:
+        nav: "sidebar"
