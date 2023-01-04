@@ -27,7 +27,7 @@ bluetooth 통신에는 bluetooth classic과 bluetooth low energy가 있습니다
 
 또는 pubspec.yaml 에 입력하여 설치하는 방법입니다.
 
-```
+```yaml
 dependencies:
     flutter_reactive_ble: ^5.0.3
 ```
@@ -57,7 +57,7 @@ The reactive BLE lib supports the following:
 Android
 안드로이드에서 사용하려면 `AndroidManifest.xml`에 다음의 권한을 추가해야 합니다.
 
-```
+```xml
 <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
 <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" />
@@ -70,20 +70,20 @@ Android
 
 패키지를 import 합니다.
 
-```
+```dart
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 ```
 
 Flutter_reactive_ble 를 사용하기 위해서는 객체를 선언해야 합니다
 
-```
+```dart
 final flutterReactiveBle = FlutterReactiveBle();
 ```
 
 BLE 디바이스를 검색하여 코드입니다.
 results.contains(device) 로 검색을 하면 false만 출력되어 id끼리 비교했습니다.
 
-```
+```dart
 List<DiscoveredDevice> results = [];
 
 flutterReactiveBle.scanForDevices(withServices: []).listen((DiscoveredDevice device) {
@@ -96,7 +96,7 @@ BLE 디바이스와 연결, 해제하는 코드입니다.
 Flutter_reactive_ble 패키지에는 디바이스와 연결하는 함수는 있지만 연결을 해제하는 함수는 따로 존재하지 않습니다.
 연결할 때 만들어지는 stream을 cancel하는것으로 연결을 해제할 수 있습니다.
 
-```
+```dart
 StreamSubscription<ConnectionStateUpdate> connection;
 
 // 연결
@@ -120,7 +120,7 @@ connection.cancel();
 
 디바이스의 Service와 Chracteristic을 찾아 연결하는 코드입니다.
 
-```
+```dart
 flutterReactiveBle.discoverServices(device.id).then((List<DiscoveredService> services) {
     for(DiscoverdService service in services) {
         for(DiscoveredCharacteristic characteristic in service.characteristics) {

@@ -114,7 +114,7 @@
         
         <a class="site-title" href="/">
           시도하는 개발자
-          <span class="site-subtitle">version 1.0</span>
+          
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/about/">About</a>
@@ -151,6 +151,12 @@
 
 <div itemscope itemtype="https://schema.org/Person" class="h-card">
 
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/bio-photo.jpg" alt="Jungwook Hong" itemprop="image" class="u-photo">
+      </a>
+    </div>
   
 
   <div class="author__content">
@@ -372,8 +378,8 @@
 
 <p>또는 pubspec.yaml 에 입력하여 설치하는 방법입니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies:
-    flutter_reactive_ble: ^5.0.3
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dependencies</span><span class="pi">:</span>
+    <span class="na">flutter_reactive_ble</span><span class="pi">:</span> <span class="s">^5.0.3</span>
 </code></pre></div></div>
 
 <hr />
@@ -403,10 +409,10 @@
 <p>Android
 안드로이드에서 사용하려면 <code class="language-plaintext highlighter-rouge">AndroidManifest.xml</code>에 다음의 권한을 추가해야 합니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" /&gt;
-&lt;uses-permission android:name="android.permission.BLUETOOTH_CONNECT" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30" /&gt;
-&lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="30" /&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.BLUETOOTH_SCAN"</span> <span class="na">android:usesPermissionFlags=</span><span class="s">"neverForLocation"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.BLUETOOTH_CONNECT"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.ACCESS_FINE_LOCATION"</span> <span class="na">android:maxSdkVersion=</span><span class="s">"30"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.ACCESS_COARSE_LOCATION"</span> <span class="na">android:maxSdkVersion=</span><span class="s">"30"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <hr />
@@ -415,97 +421,97 @@
 
 <p>패키지를 import 합니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="s">'package:flutter_reactive_ble/flutter_reactive_ble.dart'</span><span class="o">;</span>
 </code></pre></div></div>
 
 <p>Flutter_reactive_ble 를 사용하기 위해서는 객체를 선언해야 합니다</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>final flutterReactiveBle = FlutterReactiveBle();
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">flutterReactiveBle</span> <span class="o">=</span> <span class="n">FlutterReactiveBle</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>BLE 디바이스를 검색하여 코드입니다.
 results.contains(device) 로 검색을 하면 false만 출력되어 id끼리 비교했습니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>List&lt;DiscoveredDevice&gt; results = [];
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">List</span><span class="p">&lt;</span><span class="n">DiscoveredDevice</span><span class="p">&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="p">[];</span>
 
-flutterReactiveBle.scanForDevices(withServices: []).listen((DiscoveredDevice device) {
-    if(results.any((result) =&gt; result.id == device.id)) return;
-    results.add(device);
-});
+<span class="n">flutterReactiveBle</span><span class="o">.</span><span class="na">scanForDevices</span><span class="p">(</span><span class="nl">withServices:</span> <span class="p">[])</span><span class="o">.</span><span class="na">listen</span><span class="p">((</span><span class="n">DiscoveredDevice</span> <span class="n">device</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="na">any</span><span class="p">((</span><span class="n">result</span><span class="p">)</span> <span class="o">=</span><span class="p">&gt;</span> <span class="n">result</span><span class="o">.</span><span class="na">id</span> <span class="o">==</span> <span class="n">device</span><span class="o">.</span><span class="na">id</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">results</span><span class="o">.</span><span class="na">add</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
 <p>BLE 디바이스와 연결, 해제하는 코드입니다.
 Flutter_reactive_ble 패키지에는 디바이스와 연결하는 함수는 있지만 연결을 해제하는 함수는 따로 존재하지 않습니다.
 연결할 때 만들어지는 stream을 cancel하는것으로 연결을 해제할 수 있습니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StreamSubscription&lt;ConnectionStateUpdate&gt; connection;
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">StreamSubscription</span><span class="p">&lt;</span><span class="n">ConnectionStateUpdate</span><span class="p">&gt;</span> <span class="n">connection</span><span class="p">;</span>
 
-// 연결
-connection = flutterReactiveBle.connectToDevice(id: device.id, connectionTimeout: const Duration(seconds: 4))
-            .listen((ConnectionStateUpdate state) {
-                switch (state.connectionState) {
-                    case DeviceConnectionState.disconnected:
-                        break;
-                    case DeviceConnectionState.connecting:
-                        break;
-                    case DeviceConnectionState.connected:
-                        break;
-                    case DeviceConnectionState.disconnecting:
-                        break;
-                }
-            });
+<span class="c1">// 연결</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">flutterReactiveBle</span><span class="o">.</span><span class="na">connectToDevice</span><span class="p">(</span><span class="nl">id:</span> <span class="n">device</span><span class="o">.</span><span class="na">id</span><span class="p">,</span> <span class="nl">connectionTimeout:</span> <span class="kd">const</span> <span class="n">Duration</span><span class="p">(</span><span class="nl">seconds:</span> <span class="mi">4</span><span class="p">))</span>
+            <span class="o">.</span><span class="na">listen</span><span class="p">((</span><span class="n">ConnectionStateUpdate</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">switch</span> <span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="na">connectionState</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">case</span> <span class="n">DeviceConnectionState</span><span class="o">.</span><span class="na">disconnected</span><span class="o">:</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="k">case</span> <span class="n">DeviceConnectionState</span><span class="o">.</span><span class="na">connecting</span><span class="o">:</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="k">case</span> <span class="n">DeviceConnectionState</span><span class="o">.</span><span class="na">connected</span><span class="o">:</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="k">case</span> <span class="n">DeviceConnectionState</span><span class="o">.</span><span class="na">disconnecting</span><span class="o">:</span>
+                        <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
 
-// 해제
-connection.cancel();
+<span class="c1">// 해제</span>
+<span class="n">connection</span><span class="o">.</span><span class="na">cancel</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>디바이스의 Service와 Chracteristic을 찾아 연결하는 코드입니다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutterReactiveBle.discoverServices(device.id).then((List&lt;DiscoveredService&gt; services) {
-    for(DiscoverdService service in services) {
-        for(DiscoveredCharacteristic characteristic in service.characteristics) {
-            if(characteristic.isNotifiable) {
-                notifyCharacteristic = QualifiedCharacteristic(
-                  serviceId: service.serviceId,
-                  characteristicId: characteristic.characteristicId,
-                  deviceId: device.id,
-                );
-            }
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">flutterReactiveBle</span><span class="o">.</span><span class="na">discoverServices</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="na">id</span><span class="p">)</span><span class="o">.</span><span class="na">then</span><span class="p">((</span><span class="kt">List</span><span class="p">&lt;</span><span class="n">DiscoveredService</span><span class="p">&gt;</span> <span class="n">services</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">DiscoverdService</span> <span class="n">service</span> <span class="k">in</span> <span class="n">services</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">DiscoveredCharacteristic</span> <span class="n">characteristic</span> <span class="k">in</span> <span class="n">service</span><span class="o">.</span><span class="na">characteristics</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">characteristic</span><span class="o">.</span><span class="na">isNotifiable</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">notifyCharacteristic</span> <span class="o">=</span> <span class="n">QualifiedCharacteristic</span><span class="p">(</span>
+                  <span class="nl">serviceId:</span> <span class="n">service</span><span class="o">.</span><span class="na">serviceId</span><span class="p">,</span>
+                  <span class="nl">characteristicId:</span> <span class="n">characteristic</span><span class="o">.</span><span class="na">characteristicId</span><span class="p">,</span>
+                  <span class="nl">deviceId:</span> <span class="n">device</span><span class="o">.</span><span class="na">id</span><span class="p">,</span>
+                <span class="p">);</span>
+            <span class="p">}</span>
 
-            if(characteristic.isWritableWithResponse) {
-                writeCharacteristic = QualifiedCharacteristic(
-                  serviceId: service.serviceId,
-                  characteristicId: characteristic.characteristicId,
-                  deviceId: device.id,
-                );
-            }
+            <span class="k">if</span><span class="p">(</span><span class="n">characteristic</span><span class="o">.</span><span class="na">isWritableWithResponse</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">writeCharacteristic</span> <span class="o">=</span> <span class="n">QualifiedCharacteristic</span><span class="p">(</span>
+                  <span class="nl">serviceId:</span> <span class="n">service</span><span class="o">.</span><span class="na">serviceId</span><span class="p">,</span>
+                  <span class="nl">characteristicId:</span> <span class="n">characteristic</span><span class="o">.</span><span class="na">characteristicId</span><span class="p">,</span>
+                  <span class="nl">deviceId:</span> <span class="n">device</span><span class="o">.</span><span class="na">id</span><span class="p">,</span>
+                <span class="p">);</span>
+            <span class="p">}</span>
 
-            if(characteristic.isWritableWithoutResponse) {
-            }
+            <span class="k">if</span><span class="p">(</span><span class="n">characteristic</span><span class="o">.</span><span class="na">isWritableWithoutResponse</span><span class="p">)</span> <span class="p">{</span>
+            <span class="p">}</span>
 
-            if(characteristic.isReadable) {
-                readCharacteristic = QualifiedCharacteristic(
-                  serviceId: service.serviceId,
-                  characteristicId: characteristic.characteristicId,
-                  deviceId: device.id,
-                );
-            }
-        }
-    }
+            <span class="k">if</span><span class="p">(</span><span class="n">characteristic</span><span class="o">.</span><span class="na">isReadable</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">readCharacteristic</span> <span class="o">=</span> <span class="n">QualifiedCharacteristic</span><span class="p">(</span>
+                  <span class="nl">serviceId:</span> <span class="n">service</span><span class="o">.</span><span class="na">serviceId</span><span class="p">,</span>
+                  <span class="nl">characteristicId:</span> <span class="n">characteristic</span><span class="o">.</span><span class="na">characteristicId</span><span class="p">,</span>
+                  <span class="nl">deviceId:</span> <span class="n">device</span><span class="o">.</span><span class="na">id</span><span class="p">,</span>
+                <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    flutterReactiveBle.subscribeToCharacteristic(notifyCharacteristic).listen((value) {
-      Logger().i(value);
-    });
+    <span class="n">flutterReactiveBle</span><span class="o">.</span><span class="na">subscribeToCharacteristic</span><span class="p">(</span><span class="n">notifyCharacteristic</span><span class="p">)</span><span class="o">.</span><span class="na">listen</span><span class="p">((</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="na">i</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="p">});</span>
 
-    flutterReactiveBle.writeCharacteristicWithoutResponse(
-        writeCharacteristic,
-        value: const Utf8Encoder().convert("Hello World!"),
-    );
+    <span class="n">flutterReactiveBle</span><span class="o">.</span><span class="na">writeCharacteristicWithoutResponse</span><span class="p">(</span>
+        <span class="n">writeCharacteristic</span><span class="p">,</span>
+        <span class="nl">value:</span> <span class="kd">const</span> <span class="n">Utf8Encoder</span><span class="p">()</span><span class="o">.</span><span class="na">convert</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">),</span>
+    <span class="p">);</span>
 
-    flutterReactiveBle.readCharacteristic(readCharacteristic).then((value) {
-      Logger().i(value);
-    });
-});
+    <span class="n">flutterReactiveBle</span><span class="o">.</span><span class="na">readCharacteristic</span><span class="p">(</span><span class="n">readCharacteristic</span><span class="p">)</span><span class="o">.</span><span class="na">then</span><span class="p">((</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Logger</span><span class="p">()</span><span class="o">.</span><span class="na">i</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
         
