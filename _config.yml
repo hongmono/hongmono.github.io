@@ -19,7 +19,7 @@ locale                   : "ko_KR"
 title                    : "Hongmono"
 title_separator          : "-"
 subtitle                 : # "version 1.0" # site tagline that appears below site title in masthead
-name                     : "Jungwook Hong"
+name                     : "Hong Jung Wook"
 description              : "시도하는 개발자"
 url                      : "https://hongmono.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -104,7 +104,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Jungwook Hong"
+  name             : "Hong Jung Wook"
   avatar           : "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "IT 기기에 관심이 많습니다."
   location         : "Republic of Korea"
@@ -208,6 +208,10 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+    
 
 
 # Sass/SCSS

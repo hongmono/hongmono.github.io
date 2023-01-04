@@ -17,6 +17,9 @@
 <loc>http://localhost:4000/fpga</loc>
 </url>
 <url>
+<loc>http://localhost:4000/homeassistant/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/</loc>
 </url>
 </urlset>

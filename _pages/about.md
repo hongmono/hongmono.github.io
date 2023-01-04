@@ -1,7 +1,7 @@
 ---
 permalink: /about/
 title: "About"
-layout: splash
+layout: single
 toc: true
 toc_sticky: true
 toc_label: "MY SELF"

@@ -15,5 +15,7 @@ sidebar:
     children:
       - title: "일상"
         url: "/blog"
+      - title: "Homeassistant"
+        url: "/homeassistant"
 
 
