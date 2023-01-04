@@ -4,4 +4,10 @@ var store = [{
         "tags": ["flutter","ble","bluetooth"],
         "url": "/flutter/flutter-reactive-ble/",
         "teaser": null
+      },{
+        "title": "github.io code block에 라인 넘버 추가하기",
+        "excerpt":" ","categories": [],
+        "tags": ["md","markdown"],
+        "url": "/github.io-code-block%EC%97%90-%EB%9D%BC%EC%9D%B8-%EB%84%98%EB%B2%84-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0/",
+        "teaser": null
       }]
